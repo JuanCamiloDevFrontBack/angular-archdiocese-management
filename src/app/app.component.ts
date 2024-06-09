@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,8 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
   }
 
   .footer {
+    margin-top: 10px;
     padding: 20px 0;
     text-align: center;
+    background-color: #f8f9fa;
   }
   
   .footer a {
@@ -22,8 +25,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'app-archdiocese-management';
+  showParishBtn = false;
+  showPriestBtn = true;
 
   private readonly translate = inject(TranslateService);
+  private readonly router = inject(Router);
 
   constructor() {
     this.translate.addLangs(['es', 'en']);
@@ -35,8 +41,16 @@ export class AppComponent {
     }
   }
 
-  goToparishedSection(): void {}
+  goToparishedSection(): void {
+    this.showParishBtn = false;
+    this.showPriestBtn = true;
+    this.router.navigate(['parished']);
+  }
 
-  goTopriestsSection(): void {}
+  goTopriestsSection(): void {
+    this.showParishBtn = true;
+    this.showPriestBtn = false;
+    this.router.navigate(['priests']);
+  }
 
 }

@@ -1,10 +1,10 @@
 <header>
   <div class="p-grid">
     <div class="col-12 text-center">
-      <button pButton type="button" label="{{'Parroquias' | translate}}" class="p-button-info p-button-text"
+      <button *ngIf="showParishBtn" pButton type="button" label="{{'Consultar Parroquias' | translate}}" class="p-button-info p-button-text"
       (click)="goToparishedSection()"></button>
 
-      <button pButton type="button" label="{{'Sacerdotes' | translate}}" class="p-button-info p-button-text"
+      <button *ngIf="showPriestBtn" pButton type="button" label="{{'Consultar Sacerdotes' | translate}}" class="p-button-info p-button-text"
       (click)="goTopriestsSection()"></button>
     </div>
   </div>

@@ -1,1 +1,105 @@
-<p>admin-parished works!</p>
+<p-toast></p-toast>
+<p-messages [key]="'alert-parish'" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+
+<div class="grid flex justify-content-center">
+    <div class="col-12 flex align-items-center justify-content-center">
+        <h2>{{'Administración de las Parroquia de la Arquediocesis' | translate}}</h2>
+    </div>
+    <div class="col-8">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div class="field">
+                <label for="name">{{'Nombre:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="name" formControlName="{{inputs.NAME}}"
+                        (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.NAME)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="address">{{'Dirección:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="address" formControlName="{{inputs.ADDRESS}}"
+                        (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.ADDRESS)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="location">{{'Barrio:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="location" formControlName="{{inputs.LOCATION}}"
+                        (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.LOCATION)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <!-- Form:
+            <pre>{{form.value | json}}</pre> -->
+            <section class="grid">
+                <div class="col-6">
+                    <button pButton type="button" label="{{'limpiar' | translate}}" class="w-12 p-button-info"
+                        (click)="this.form.reset()"></button>
+                </div>
+                <div *ngIf="false" class="col-6">
+                    <button pButton type="button" label="{{'Editar' | translate}}" class="w-12"
+                        [disabled]="form.invalid" (click)="editParish()"></button>
+                </div>
+                <div *ngIf="true" class="col-6">
+                    <button pButton type="submit" label="{{'Agregar' | translate}}" class="w-12 p-button-success"
+                        [disabled]="form.invalid"></button>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <p-card class="w-10 text-center" [style]="{'margin-top': '10px', 'background-color': '#f8f9fa'}">
+
+        <section *ngIf="selectedParished !== null" class="p-grid">
+            <div class="col-12 text-right">
+                <button pButton type="button" label="{{'Editar' | translate}}" class="p-button-text p-button-info" (click)="editParish()"></button>
+
+                <button pButton type="button" label="{{'Eliminar' | translate}}" class="p-button-text p-button-danger"
+                    (click)="deleteParish()"></button>
+            </div>
+        </section>
+
+        <p-table [value]="listParished" [(selection)]="selectedParished" dataKey="id" styleClass="p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th class="text-center">{{'Id' | translate}}</th>
+                    <th class="text-center">{{'Nombre' | translate}}</th>
+                    <th class="text-center">{{'Dirección' | translate}}</th>
+                    <th class="text-center">{{'Barrio' | translate}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-listParished>
+                <tr>
+                    <td class="text-center"><p-tableRadioButton [value]="listParished" /></td>
+                    <!-- <td class="text-center"><p-tableCheckbox [value]="listParished"></p-tableCheckbox></td> -->
+                    <td class="text-center">{{ listParished[inputs.ID] }}</td>
+                    <td class="text-center">{{ listParished[inputs.NAME] }}</td>
+                    <td class="text-center">{{ listParished[inputs.ADDRESS] }}</td>
+                    <td class="text-center">{{ listParished[inputs.LOCATION] }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6" class="text-center">{{'No hay registros' | translate}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </p-card>
+
+</div>
