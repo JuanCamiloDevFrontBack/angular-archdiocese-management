@@ -8,25 +8,10 @@
       (click)="goTopriestsSection()"></button>
     </div>
   </div>
-
-  <!-- Ejemplo
-  <div *ngIf="isActiveHeader" class="p-grid p-justify-end">
-      <div class="col-12 text-right">
-        <button
-        pButton
-          label="{{'Parroquias' | translate}}"
-          class="p-button-secondary p-button-text"
-          (click)="logOut()"
-        >
-          <i class="pi pi-sign-out"></i>
-        </button>
-      </div>
-    </div> -->
 </header>
 
 <main>
-  <!-- <p-toast></p-toast> -->
-  <!-- (activate)="routeIsActive()" -->
+  <p-toast></p-toast>
   <router-outlet></router-outlet>
 </main>
 
