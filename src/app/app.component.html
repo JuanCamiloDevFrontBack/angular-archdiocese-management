@@ -1,9 +1,20 @@
 <header>
-  <!-- <div *ngIf="isActiveHeader" class="p-grid p-justify-end">
+  <div class="p-grid">
+    <div class="col-12 text-center">
+      <button pButton type="button" label="{{'Parroquias' | translate}}" class="p-button-info p-button-text"
+      (click)="goToparishedSection()"></button>
+
+      <button pButton type="button" label="{{'Sacerdotes' | translate}}" class="p-button-info p-button-text"
+      (click)="goTopriestsSection()"></button>
+    </div>
+  </div>
+
+  <!-- Ejemplo
+  <div *ngIf="isActiveHeader" class="p-grid p-justify-end">
       <div class="col-12 text-right">
         <button
         pButton
-          label="{{'login.close' | translate}}"
+          label="{{'Parroquias' | translate}}"
           class="p-button-secondary p-button-text"
           (click)="logOut()"
         >
@@ -16,7 +27,7 @@
 <main>
   <!-- <p-toast></p-toast> -->
   <!-- (activate)="routeIsActive()" -->
-  <router-outlet ></router-outlet>
+  <router-outlet></router-outlet>
 </main>
 
 <footer>
