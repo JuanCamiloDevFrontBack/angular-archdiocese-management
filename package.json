@@ -6,7 +6,7 @@
     "start-prod": "ng serve --port=5000 -c=production",
     "start-dev": "ng serve --port 5000",
     "start-dev-mobile": "ng serve --host=0.0.0.0 --port=5000",
-    "build": "ng build && npm i --legacy-peer-deps",
+    "build": "ng build && npm i --legacy-peer-deps && npm i --force",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
