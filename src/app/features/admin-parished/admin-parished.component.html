@@ -43,18 +43,16 @@
                 </div>
             </div>
 
-            <!-- Form:
-            <pre>{{form.value | json}}</pre> -->
             <section class="grid">
                 <div class="col-6">
                     <button pButton type="button" label="{{'limpiar' | translate}}" class="w-12 p-button-info"
                         (click)="this.form.reset()"></button>
                 </div>
-                <div *ngIf="false" class="col-6">
+                <div *ngIf="!showAddBtn" class="col-6">
                     <button pButton type="button" label="{{'Editar' | translate}}" class="w-12"
-                        [disabled]="form.invalid" (click)="editParish()"></button>
+                        [disabled]="form.invalid" (click)="updateRegister()"></button>
                 </div>
-                <div *ngIf="true" class="col-6">
+                <div *ngIf="showAddBtn" class="col-6">
                     <button pButton type="submit" label="{{'Agregar' | translate}}" class="w-12 p-button-success"
                         [disabled]="form.invalid"></button>
                 </div>
@@ -77,6 +75,7 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
+                    <th class="text-center">#</th>
                     <th class="text-center">{{'Id' | translate}}</th>
                     <th class="text-center">{{'Nombre' | translate}}</th>
                     <th class="text-center">{{'Dirección' | translate}}</th>
@@ -86,7 +85,7 @@
             <ng-template pTemplate="body" let-listParished>
                 <tr>
                     <td class="text-center"><p-tableRadioButton [value]="listParished" /></td>
-                    <!-- <td class="text-center"><p-tableCheckbox [value]="listParished"></p-tableCheckbox></td> -->
+                    <td class="text-center">{{ ++count }}</td>
                     <td class="text-center">{{ listParished[inputs.ID] }}</td>
                     <td class="text-center">{{ listParished[inputs.NAME] }}</td>
                     <td class="text-center">{{ listParished[inputs.ADDRESS] }}</td>

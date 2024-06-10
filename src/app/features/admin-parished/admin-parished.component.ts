@@ -22,8 +22,10 @@ export class AdminParishedComponent implements OnInit {
   inputs = ParishEnum;
 
   form!: FormGroup;
-  listParished!: any;
+  listParished!: ParishI[];
   selectedParished!: null | ParishI;
+  showAddBtn!: boolean;
+  count!: number;
 
   messages!: Message[];
 
@@ -32,23 +34,26 @@ export class AdminParishedComponent implements OnInit {
   private readonly http = inject(HttpApiRestService);
 
   ngOnInit(): void {
-      this.initVariables();
+    this.initVariables();
   }
 
   initVariables(): void {
     this.createForm();
     this.selectedParished = null;
+    this.showAddBtn = true;
+    this.count = 1;
     this.getListParished();
   }
 
   getListParished(): void {
     this.http.listParishedHttp()
-    .subscribe({
-      next: res => this.listParished = res,
-      error: err => {
-        console.log('error en la petición: ', err); 
-        this.alerts.error({summary: 'Error', msg: 'A ocurrido un error al cosultar la información.'});
-      }})
+      .subscribe({
+        next: res => this.listParished = res as ParishI[],
+        error: err => {
+          console.log('error en la petición: ', err);
+          this.alerts.error({ summary: 'Error', msg: 'A ocurrido un error al cosultar la información.' });
+        }
+      })
   }
 
   createForm(): void {
@@ -67,41 +72,77 @@ export class AdminParishedComponent implements OnInit {
 
   submitForm(): void {
     this.http.createParishedHttp(this.form.value)
-    .subscribe({
-      next: res => {
-        console.log('res: ', res);
-        this.form.reset();
-        this.getListParished();
-        this.alerts.success({summary: 'Registro Guardado Correctamente', msg: 'Se guardo el registro en la base de datos.'})
-      },
-      error: err => {
-        console.log('error en la petición: ', err); 
-        this.alerts.error({summary: 'Error', msg: 'A ocurrido un error al guardar la información.'});
-      }});
+      .subscribe({
+        next: res => {
+          console.log('res: ', res);
+          this.form.reset();
+          this.getListParished();
+          this.alerts.success({ summary: 'Registro Guardado Correctamente', msg: 'Se guardo el registro en la base de datos.' })
+        },
+        error: err => {
+          console.log('error en la petición: ', err);
+          this.alerts.error({ summary: 'Error', msg: 'A ocurrido un error al guardar la información.' });
+        }
+      });
   }
 
-  editParish(): void {}
+  editParish(): void {
+    const id = this.selectedParished?.id ?? '';
+
+    if (id === '' || isNaN(Number(id))) {
+      this.alerts.warning({ summary: 'Advertencia', msg: 'no se pudo editar el registro porque el id es inválido.' });
+      return;
+    }
+
+    this.showAddBtn = false;
+    const { ID, NAME, ADDRESS, LOCATION } = ParishEnum;
+    this.form.patchValue({
+      [ID]: this.selectedParished?.id ?? '',
+      [NAME]: this.selectedParished?.name ?? '',
+      [ADDRESS]: this.selectedParished?.address ?? '',
+      [LOCATION]: this.selectedParished?.district ?? ''
+    });
+  }
+
+  updateRegister(): void {
+    this.http.updateParishedHttp(this.form.value)
+      .subscribe({
+        next: res => {
+          console.log('res: ', res);
+          this.selectedParished = null;
+          this.showAddBtn = true;
+          this.form.reset();
+          this.getListParished();
+          this.alerts.success({ summary: 'Registro Actualizado Correctamente', msg: 'Se actualizó el registro en la base de datos.' })
+        },
+        error: err => {
+          console.log('error en la petición: ', err);
+          this.alerts.error({ summary: 'Error al Editar', msg: 'A ocurrido un error al actualizar el registro.' });
+        }
+      });
+  }
 
   deleteParish(): void {
     const id = this.selectedParished?.id ?? '';
 
     if (id === '') {
-      this.alerts.warning({summary: 'Advertencia', msg: 'no se pudo eliminar el registro porque el id es inválido.'});
+      this.alerts.warning({ summary: 'Advertencia', msg: 'no se pudo eliminar el registro porque el id es inválido.' });
       return;
     }
 
     this.http.deleteParishedHttp(id)
-    .subscribe({
-      next: res => {
-        console.log('res: ', res);
-        this.selectedParished = null;
-        this.getListParished();
-        this.alerts.success({summary: 'Registro Eliminado Correctamente', msg: 'Se eliminó el registro en la base de datos.'})
-      },
-      error: err => {
-        console.log('error en la petición: ', err); 
-        this.alerts.error({summary: 'Error', msg: 'A ocurrido un error al eliminar el registro.'});
-      }})
+      .subscribe({
+        next: res => {
+          console.log('res: ', res);
+          this.selectedParished = null;
+          this.getListParished();
+          this.alerts.success({ summary: 'Registro Eliminado Correctamente', msg: 'Se eliminó el registro en la base de datos.' })
+        },
+        error: err => {
+          console.log('error en la petición: ', err);
+          this.alerts.error({ summary: 'Error', msg: 'A ocurrido un error al eliminar el registro.' });
+        }
+      })
   }
 
 }

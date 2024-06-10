@@ -41,6 +41,14 @@ export class AppComponent {
     }
   }
 
+  routeIsActive(): void {
+    const currentUrl = (this.router.url === '/parished') ? 0 : 1;
+    ({
+      0: () => this.goToparishedSection(),
+      1: () => this.goTopriestsSection()
+    })[currentUrl]();
+  }
+
   goToparishedSection(): void {
     this.showParishBtn = false;
     this.showPriestBtn = true;

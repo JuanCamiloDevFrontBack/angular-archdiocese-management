@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-<p>admin-priests works!</p>
+<p-messages [key]="'alert-priest'" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
 <!-- <div class="field">
     <label for="producto">{{'sales-product.form.product' | translate}}</label>
     <div class="col aling-inputs-form">
@@ -7,3 +7,132 @@
             [optionLabel]="'nameProduct'" formControlName="{{inputs.infoProduct}}"></p-dropdown>
     </div>
 </div> -->
+
+<div class="grid flex justify-content-center">
+    <div class="col-12 flex align-items-center justify-content-center">
+        <h2>{{'Administración de los Sacerdotes de la Arquediocesis' | translate}}</h2>
+    </div>
+    <div class="col-8">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div class="field">
+                <label for="name">{{'Nombre:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="name" formControlName="{{inputs.NAME}}"
+                        (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.NAME)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="age">{{'Edad:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="age" formControlName="{{inputs.AGE}}"
+                        (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.AGE)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="ordinationDate">{{'Fecha de Ordenación:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="ordinationDate"
+                        formControlName="{{inputs.ORDINATION}}" (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.ORDINATION)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="isParishPriest">{{'¿Es Párroco?' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="isParishPriest"
+                        formControlName="{{inputs.HASPARISH}}" (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.HASPARISH)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="idParish">{{'ID de la Parroquia:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <input pInputText class="w-10 text-center" label="idParish" formControlName="{{inputs.IDPARISH}}"
+                        (keydown.enter)="onEnter($event)" />
+                </div>
+                <!-- form.get(inputs.IDPARISH)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+
+            <!-- Form:
+            <pre>{{form.value | json}}</pre> -->
+            <section class="grid">
+                <div class="col-6">
+                    <button pButton type="button" label="{{'limpiar' | translate}}" class="w-12 p-button-info"
+                        (click)="this.form.reset()"></button>
+                </div>
+                <div *ngIf="!showAddBtn" class="col-6">
+                    <button pButton type="button" label="{{'Editar' | translate}}" class="w-12"
+                        [disabled]="form.invalid" (click)="updateRegister()"></button>
+                </div>
+                <div *ngIf="showAddBtn" class="col-6">
+                    <button pButton type="submit" label="{{'Agregar' | translate}}" class="w-12 p-button-success"
+                        [disabled]="form.invalid"></button>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <p-card class="w-10 text-center" [style]="{'margin-top': '10px', 'background-color': '#f8f9fa'}">
+        <section *ngIf="selectedPriest !== null" class="p-grid">
+            <div class="col-12 text-right">
+                <button pButton type="button" label="{{'Editar' | translate}}" class="p-button-text p-button-info"
+                    (click)="editPriest()"></button>
+
+                <button pButton type="button" label="{{'Eliminar' | translate}}" class="p-button-text p-button-danger"
+                    (click)="deletePriest()"></button>
+            </div>
+        </section>
+
+        <p-table [value]="listPriests" [(selection)]="selectedPriest" dataKey="id" styleClass="p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th class="text-center">{{'Id' | translate}}</th>
+                    <th class="text-center">{{'Nombre' | translate}}</th>
+                    <th class="text-center">{{'Edad' | translate}}</th>
+                    <th class="text-center">{{'Fecha de Ordenación' | translate}}</th>
+                    <th class="text-center">{{'Es Párroco' | translate}}</th>
+                    <th class="text-center">{{'Id Parroquia' | translate}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-priest>
+                <tr>
+                    <td class="text-center"><p-tableRadioButton [value]="priest" /></td>
+                    <td class="text-center">{{ priest[inputs.ID] }}</td>
+                    <td class="text-center">{{ priest[inputs.NAME] }}</td>
+                    <td class="text-center">{{ priest[inputs.AGE] }}</td>
+                    <td class="text-center">{{ priest[inputs.ORDINATION] | date }}</td>
+                    <td class="text-center">{{ priest[inputs.HASPARISH] ? 'Sí' : 'No' }}</td>
+                    <td class="text-center">{{ priest[inputs.IDPARISH] }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7" class="text-center">{{'No hay registros' | translate}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
+
+</div>

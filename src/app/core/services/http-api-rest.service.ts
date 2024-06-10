@@ -29,6 +29,14 @@ export class HttpApiRestService {
       );
   }
 
+  updateParishedHttp(newParish: ParishI): Observable<unknown> {
+    return this.http.patch<any>(this.api + '/update-parishes', newParish)
+      .pipe(
+        map(res => res),
+        catchError(err => err)
+      );
+  }
+
   deleteParishedHttp(id: string): Observable<unknown> {
     return this.http.delete<any>(this.api + '/delete-parishes/' + id)
       .pipe(
