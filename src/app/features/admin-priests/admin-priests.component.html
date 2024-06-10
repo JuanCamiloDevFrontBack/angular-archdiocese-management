@@ -35,10 +35,10 @@
                 <label for="ordinationDate">{{'Fecha de Ordenación:' | translate}}</label>
                 <div class="col aling-inputs-form text-center">
                     <!-- dateFormat="dd/mm/yy" -->
+                    <!-- [iconDisplay]="'input'" -->
                     <p-calendar class="text-center"
                                 [style]="{'width':'84%'}"
                                 [showIcon]="true"
-                                [iconDisplay]="'input'"
                                 formControlName="{{inputs.ORDINATION}}"
                                 (keydown.enter)="onEnter($event)">
                     </p-calendar>
@@ -73,7 +73,7 @@
                 <div class="col aling-inputs-form text-center">
                     <p-checkbox 
                         class="w-10"
-                        binary="true"
+                        [binary]="true"
                         formControlName="{{inputs.HASPARISH}}" 
                         (keydown.enter)="onEnter($event)">
                     </p-checkbox>
