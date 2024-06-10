@@ -10,6 +10,7 @@ import { ParishI } from '../interfaces/parish.interface';
 export class HttpApiRestService {
 
   private readonly api = `${environment.apiRest}/features`;
+  private readonly apiDocker = `${environment.apiRestDocker}/features`;
 
   constructor(private readonly http: HttpClient) { }
 

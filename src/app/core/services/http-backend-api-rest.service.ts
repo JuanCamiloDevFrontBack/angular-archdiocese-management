@@ -10,6 +10,7 @@ import { PriestI } from '../interfaces/priest.interface';
 export class HttpBackendApiRestService {
 
   private readonly api = `${environment.apiRest}/features`;
+  private readonly apiDocker = `${environment.apiRestDocker}/features`;
   private readonly httpB: HttpClient;
 
   constructor(private readonly httpBackend: HttpBackend) {
