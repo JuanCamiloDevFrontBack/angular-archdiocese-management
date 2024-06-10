@@ -1,12 +1,5 @@
 <p-toast></p-toast>
 <p-messages [key]="'alert-priest'" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
-<!-- <div class="field">
-    <label for="producto">{{'sales-product.form.product' | translate}}</label>
-    <div class="col aling-inputs-form">
-        <p-dropdown class="text-center" [style]="{'width':'100%'}" [options]="productos"
-            [optionLabel]="'nameProduct'" formControlName="{{inputs.infoProduct}}"></p-dropdown>
-    </div>
-</div> -->
 
 <div class="grid flex justify-content-center">
     <div class="col-12 flex align-items-center justify-content-center">
@@ -41,10 +34,35 @@
             <div class="field">
                 <label for="ordinationDate">{{'Fecha de Ordenación:' | translate}}</label>
                 <div class="col aling-inputs-form text-center">
-                    <input pInputText class="w-10 text-center" label="ordinationDate"
-                        formControlName="{{inputs.ORDINATION}}" (keydown.enter)="onEnter($event)" />
+                    <!-- dateFormat="dd/mm/yy" -->
+                    <p-calendar class="text-center"
+                                [style]="{'width':'84%'}"
+                                [showIcon]="true"
+                                [iconDisplay]="'input'"
+                                formControlName="{{inputs.ORDINATION}}"
+                                (keydown.enter)="onEnter($event)">
+                    </p-calendar>
                 </div>
                 <!-- form.get(inputs.ORDINATION)?.errors !== null -->
+                <div *ngIf="false" class="error-message">
+                    {{'msg-errors.sales-product.amount' | translate}}
+                </div>
+            </div>
+            
+            <div class="field">
+                <label for="idParish">{{'ID de la Parroquia:' | translate}}</label>
+                <div class="col aling-inputs-form text-center">
+                    <p-dropdown
+                        class="text-center"
+                        [style]="{'width':'84%'}"
+                        [options]="parishes" 
+                        optionLabel="name" 
+                        formControlName="{{inputs.IDPARISH}}" 
+                        placeholder="Seleccionar Parroquia"
+                        (keydown.enter)="onEnter($event)">
+                    </p-dropdown>
+                </div>
+                <!-- form.get(inputs.IDPARISH)?.errors !== null -->
                 <div *ngIf="false" class="error-message">
                     {{'msg-errors.sales-product.amount' | translate}}
                 </div>
@@ -53,22 +71,14 @@
             <div class="field">
                 <label for="isParishPriest">{{'¿Es Párroco?' | translate}}</label>
                 <div class="col aling-inputs-form text-center">
-                    <input pInputText class="w-10 text-center" label="isParishPriest"
-                        formControlName="{{inputs.HASPARISH}}" (keydown.enter)="onEnter($event)" />
+                    <p-checkbox 
+                        class="w-10"
+                        binary="true"
+                        formControlName="{{inputs.HASPARISH}}" 
+                        (keydown.enter)="onEnter($event)">
+                    </p-checkbox>
                 </div>
                 <!-- form.get(inputs.HASPARISH)?.errors !== null -->
-                <div *ngIf="false" class="error-message">
-                    {{'msg-errors.sales-product.amount' | translate}}
-                </div>
-            </div>
-
-            <div class="field">
-                <label for="idParish">{{'ID de la Parroquia:' | translate}}</label>
-                <div class="col aling-inputs-form text-center">
-                    <input pInputText class="w-10 text-center" label="idParish" formControlName="{{inputs.IDPARISH}}"
-                        (keydown.enter)="onEnter($event)" />
-                </div>
-                <!-- form.get(inputs.IDPARISH)?.errors !== null -->
                 <div *ngIf="false" class="error-message">
                     {{'msg-errors.sales-product.amount' | translate}}
                 </div>
@@ -108,6 +118,7 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
+                    <th class="text-center">#</th>
                     <th class="text-center">{{'Id' | translate}}</th>
                     <th class="text-center">{{'Nombre' | translate}}</th>
                     <th class="text-center">{{'Edad' | translate}}</th>
@@ -116,9 +127,10 @@
                     <th class="text-center">{{'Id Parroquia' | translate}}</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-priest>
+            <ng-template pTemplate="body" let-i="rowIndex" let-priest>
                 <tr>
                     <td class="text-center"><p-tableRadioButton [value]="priest" /></td>
+                    <td class="text-center">{{ i + 1 }}</td>
                     <td class="text-center">{{ priest[inputs.ID] }}</td>
                     <td class="text-center">{{ priest[inputs.NAME] }}</td>
                     <td class="text-center">{{ priest[inputs.AGE] }}</td>
@@ -129,7 +141,7 @@
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="7" class="text-center">{{'No hay registros' | translate}}</td>
+                    <td colspan="8" class="text-center">{{'No hay registros' | translate}}</td>
                 </tr>
             </ng-template>
         </p-table>

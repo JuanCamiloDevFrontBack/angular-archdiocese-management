@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ export class AppComponent {
   showParishBtn = false;
   showPriestBtn = true;
 
+  private readonly primengConf = inject(PrimeNGConfig);
   private readonly translate = inject(TranslateService);
   private readonly router = inject(Router);
 
@@ -39,6 +41,23 @@ export class AppComponent {
     } else {
       this.translate.use(lang);
     }
+
+    this.setLocaleSettings();
+  }
+
+  setLocaleSettings(): void {
+    this.primengConf.setTranslation({
+      firstDayOfWeek: 1,
+      dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+      dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+      dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+      monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+      monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+      today: 'Hoy',
+      clear: 'Borrar',
+      weekHeader: 'Sm'
+      });
+    // dateFormat: 'dd/mm/yy',
   }
 
   routeIsActive(): void {

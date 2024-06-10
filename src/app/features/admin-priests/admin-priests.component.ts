@@ -26,6 +26,12 @@ export class AdminPriestsComponent implements OnInit {
   selectedPriest!: null | PriestI;
   showAddBtn!: boolean;
 
+  parishes: any[] = [
+    { name: 'Parroquia 1', id: 1 },
+    { name: 'Parroquia 2', id: 2 },
+    { name: 'Parroquia 3', id: 3 }
+  ];
+
   messages!: Message[];
 
   private readonly fb = inject(FormBuilder);
@@ -61,8 +67,8 @@ export class AdminPriestsComponent implements OnInit {
       [NAME]: [null, Validators.required],
       [AGE]: [null, Validators.required],
       [ORDINATION]: [null, Validators.required],
-      [HASPARISH]: [null, Validators.required],
-      [IDPARISH]: [null, Validators.required]
+      [HASPARISH]: [false],
+      [IDPARISH]: [null]
     });
   }
 

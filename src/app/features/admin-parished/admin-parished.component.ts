@@ -25,7 +25,6 @@ export class AdminParishedComponent implements OnInit {
   listParished!: ParishI[];
   selectedParished!: null | ParishI;
   showAddBtn!: boolean;
-  count!: number;
 
   messages!: Message[];
 
@@ -41,7 +40,6 @@ export class AdminParishedComponent implements OnInit {
     this.createForm();
     this.selectedParished = null;
     this.showAddBtn = true;
-    this.count = 1;
     this.getListParished();
   }
 

@@ -82,10 +82,10 @@
                     <th class="text-center">{{'Barrio' | translate}}</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-listParished>
+            <ng-template pTemplate="body" let-i="rowIndex" let-listParished>
                 <tr>
                     <td class="text-center"><p-tableRadioButton [value]="listParished" /></td>
-                    <td class="text-center">{{ ++count }}</td>
+                    <td class="text-center">{{ i + 1 }}</td>
                     <td class="text-center">{{ listParished[inputs.ID] }}</td>
                     <td class="text-center">{{ listParished[inputs.NAME] }}</td>
                     <td class="text-center">{{ listParished[inputs.ADDRESS] }}</td>

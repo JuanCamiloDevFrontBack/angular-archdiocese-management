@@ -9,6 +9,8 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DividerModule } from 'primeng/divider';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -21,6 +23,9 @@ import { DividerModule } from 'primeng/divider';
     TableModule,
     InputTextareaModule,
     DividerModule,
+    CalendarModule,
+    DropdownModule,
+    CheckboxModule
   ],
   exports: [
     DropdownModule,
@@ -31,6 +36,9 @@ import { DividerModule } from 'primeng/divider';
     TableModule,
     InputTextareaModule,
     DividerModule,
+    CalendarModule,
+    DropdownModule,
+    CheckboxModule
   ]
 })
 export class SharedModule { }
