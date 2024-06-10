@@ -1,4 +1,4 @@
 export const environment = {
     product: true,
-    apiRest: 'http://localhost:8001/archdiocese-management'
+    apiRest: 'https://spring-boot-archdiocese-management.onrender.com/archdiocese-management'
 };
