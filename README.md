@@ -72,7 +72,7 @@ Ejecutar los siguientes comandos:
 1. `git clone https://github.com/JuanCamiloDevFrontBack/angular-archdiocese-management.git`.
 2. `npm i` ó `npm install`.
 4. Levantar la aplicación con: `npm run start-dev`.
-5. Abrir en el navegador la siguiente url: `http://localhost:5000/` ó `http://localhost:5000/login`.
+5. Abrir en el navegador la siguiente url: `http://localhost:5000/` ó `http://localhost:5000/parished`.
 
 
 ### Rama Deploy-Neflify
