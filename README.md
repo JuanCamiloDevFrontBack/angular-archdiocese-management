@@ -36,7 +36,7 @@ Se utilizan las siguientes herramientas:
 * Angular V.16
 * PrimeNG V.16.9.1
 * PrimeFlex V.3.3.1
-* Primeicons V.7.0.0
+* PrimeIcons V.7.0.0
 * NgxTranslateCore V.15.0.0
 * NgxTranslateHttpLoader V.8.0.0
 
