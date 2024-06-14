@@ -1,6 +1,6 @@
 # Proyecto en Angular V.16 CLI
 # Temática: Administración de Usuarios
-## Estado del Proyecto: En Desarrollo.
+## Estado del Proyecto: En Actualización.
 
 Este repositorio contiene un proyecto práctico sobre Angular V.16, que permite efectuar acciones de tipo `CRUD`
 sobre la información a manipular, el cual se divide en 3 ramas `main`, `develop` y `deploy-neflify`.
